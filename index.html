@@ -246,11 +246,16 @@ section {
     // 복사하기 버튼 기능 구현
     document.querySelectorAll('.copy-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const accountInfo = btn.parentNode.querySelector('.account-info').innerText;
+        // 조상 중 가장 가까운 donation 블록 안에서 계좌번호를 찾기
+        const donation = btn.closest('.donation');
+        const accountInfo = donation.querySelector('.account-info').innerText;
         navigator.clipboard.writeText(accountInfo)
+          .then(() => {
+            console.log('계좌 복사 성공!');
+          })
           .catch(err => console.error('계좌 복사 실패: ', err));
       });
     });
   </script>
-</body>
+  
 </html>
